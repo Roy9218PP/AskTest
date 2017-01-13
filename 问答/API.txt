@@ -1,0 +1,12 @@
+/*
+ * 功能:用户注册
+ * API:/user/register
+ * 请求方式:POST
+ * 参数说明:
+ *   参数名称          参数类型      是否必填            说明
+ *   userName     String     true      长度2-6位
+ * 		psw		  String     true      长度6-16
+ * 		email     String     true
+ * 		sex       String     true      男male;女:female 
+ * 		course    String     true      
+ */
