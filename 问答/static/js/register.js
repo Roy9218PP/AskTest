@@ -1,3 +1,9 @@
+
+$('#goBack').click(function(){
+	
+	history.back()
+})
+
 document.forms[0].onsubmit = function(e) {
 
 	e.preventDefault()
@@ -21,7 +27,7 @@ document.forms[0].onsubmit = function(e) {
 	var data = new FormData(this)
 
 	console.log(data)
-		//使用jQuery发送请求，假如数据数据是从form表单内获取，则需要使用这种方式获取表单数据。它代表把表单内的数据序列化为js对象。对象内是发送数据，请求体数据格式。
+		//使用jQuery发送请求，假如数据数据是从form表单内获取，则需要使用这种方式获取表单数据。它代表把表单内的数据序列化为请求体数据格式:userName=xx&psw=123456&...。
 	data = $(this).serialize()
 
 	console.log(data)
@@ -55,7 +61,7 @@ function sendToRgister(data) {
 
 	//方法二：
 	//使用jQuery的post()发送请求
-	$.post('/user/register', data, function(response, statusText, xhr) {
+	$.post('/user/register',data, function(response, statusText, xhr) {
 
 		if(response.result == 0) {
 
@@ -67,9 +73,8 @@ function sendToRgister(data) {
 
 			//跳转登录页面
 			$('#myModal').on('hidden.bs.modal', function() {
+				location.href = '/login.html'
 				
-				//location.href = 'login.html'
-
 			})
 		}
 

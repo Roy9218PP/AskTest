@@ -11,13 +11,59 @@ app.use(express.static('static'))
 app.use(bodyParser.urlencoded({extended:true}))
 
 /*
+ * 登录接口
+ */
+app.post('/user/login',(req,res)=>{
+	
+	var userName = req.body.userName
+	
+	var filePath = `users/${userName}.txt`
+	
+	fs.exists(filePath,(isExists)=>{
+		
+		if(isExists){
+			
+			//用户名存在,即代表用户名正确
+			
+			//接下来读取该文件
+			fs.readFile(filePath,(err,data)=>{
+				if(err){
+					
+					res.status(200).json({result:0,msg:'系统异常,请稍后重试!'})
+				}
+				else{
+					
+					data = JSON.parse(data) 
+					
+					var psw = data.psw[0]
+					
+					if(psw == req.body.psw){
+						
+						//密码正确,登录成功
+						res.status(200).json({result:1,msg:'登录成功!'})
+					}
+					else{
+						res.status(200).json({result:0,msg:'密码出错了!'})
+					}
+				}
+			})
+		}
+		else{
+			
+			res.status(200).json({result:0,msg:'该用户还未注册！'})
+		}
+	})
+})
+
+/*
  * 注册接口
  */
 app.post('/user/register',(req,res)=>{
 	
-	var userName = req.body.userName;
+	var userName = req.body.userName
 	
-	var filePath = `users/${userName}.txt`;
+	//users/roy.txt
+	var filePath = `users/${userName}.txt`
 	
 	fs.exists(filePath,(isExists)=>{
 		
