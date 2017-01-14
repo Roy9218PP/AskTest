@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>问答项目--提问</title>
+		<link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css"/>
+		<script src="libs/jQuery/jquery.min.js"></script>
+		<script src="libs/bootstrap/js/bootstrap.min.js"></script>
+		<script src="libs/jQuery/jquery.cookie.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/all.css"/>
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-title">
+					<span id="goBack" class="glyphicon glyphicon-chevron-left pull-left"></span>
+					提问
+				</div>
+				
+			</div>
+		</nav>
+		
+		<div class="container">
+			<form action="#" method="post">
+				
+				<div class="form-group">
+					<textarea name="askContent" style="width: 100%;height:30rem;resize: none;" placeholder="请输入提问内容")"></textarea>
+				</div>
+				
+				
+				<div class="form-group">
+					<input class="form-control btn btn-success" type="submit" value="提交"/>
+				</div>
+				
+			</form>
+		</div>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title" id="myModalLabel">问答项目--注册</h4>
+					</div>
+					<div class="modal-body"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+	</body>
+	<script src="js/ask.js"></script>
+</html>

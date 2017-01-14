@@ -20,6 +20,7 @@ $('#goToAsk').click(function(){
 	
 	if(userName){
 		//去提问页面
+		location.href = '/ask.html'
 	}
 	else{
 		
