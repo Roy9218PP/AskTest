@@ -40,6 +40,11 @@ app.post('/user/login',(req,res)=>{
 					if(psw == req.body.psw){
 						
 						//密码正确,登录成功
+						
+						//登录成功之后把用户名保存在cookie中,退出登录之后在清除该cookie.
+						//该cookie会被放在响应头发送给浏览器,浏览器读取后会保存在浏览器的cookie
+						res.cookie('userName',userName)
+						
 						res.status(200).json({result:1,msg:'登录成功!'})
 					}
 					else{
@@ -85,7 +90,7 @@ app.post('/user/register',(req,res)=>{
 				
 				if(err){
 					
-					res.status(500).json({result:0,msg:'服务端出错了'})
+					res.status(500).json({result:2,msg:'服务端出错了'})
 				}
 				else{
 					

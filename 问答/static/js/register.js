@@ -66,8 +66,13 @@ function sendToRgister(data) {
 		if(response.result == 0) {
 
 			//注册失败
-			$('#myModal').modal('show').find('.modal-body').text('注册失败,请稍后重试!')
-		} else {
+			$('#myModal').modal('show').find('.modal-body').text('注册失败,该用户已经注册!')
+		} 
+		else if(response.result == 2){
+			//注册失败
+			$('#myModal').modal('show').find('.modal-body').text('系统异常,请稍后重试!')
+		}
+		else {
 			//注册成功
 			$('#myModal').modal('show').find('.modal-body').text('恭喜你,注册成功!')
 

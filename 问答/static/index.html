@@ -1,10 +1,101 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="utf-8" />
-		<title></title>
+		<title>问答系统</title>
+		<link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css" />
+		<script src="libs/jQuery/jquery.min.js"></script>
+		<script src="libs/bootstrap/js/bootstrap.min.js"></script>
+		<script src="libs/jQuery/jquery.cookie.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/all.css" />
 	</head>
+
 	<body>
-		
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container dropdown">
+
+				<a class="navbar-brand" href="#">智游教育</a>
+
+				<div class="navbar-text pull-right">
+					<span id="goToAsk">
+   			 			<span class="glyphicon glyphicon-plus"></span>
+					<span>提问</span>
+					</span>
+
+					&#x3000;
+
+					<span id="goLogin" class="dropdown-toggle" data-toggle="dropdown">
+   			 			<span class="glyphicon glyphicon-user"></span>
+						<span id="userName">登录</span>
+					</span>
+
+					<ul class="dropdown-menu">
+						<li class="text-right">
+							<a href="#">
+								<span class="glyphicon glyphicon-user"></span>
+								<span>个人资料</span>
+							</a>
+						</li>
+
+						<li class="divider"></li>
+						<li class="text-right">
+							<a href="/login.html">退出登录</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+		</nav>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title" id="myModalLabel">问答项目--注册</h4>
+					</div>
+					<div class="modal-body"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+
+		<!--显示内容的区域-->
+		<div class="container">
+			<!--用户说说-->
+			<section class="userState">
+				<div class="state-avatar"></div>
+				<span class="state-userName">Roy</span>
+				<div class="state-contentBox">
+					<p class="state-content">设置一条说说</p>
+					<span class="state-date">2017-01-14</span> &#x3000;&#x3000;&#x3000;
+					<span class="state-ip">127.0.0.1</span>
+					<div class="state-userInput">
+						<textarea name="comment"></textarea>
+						<div class="sendMsg">回复</div>
+					</div>
+				</div>
+				
+				<!--好友评论-->
+				<section class="commentState">
+					<div class="comment-avatar"></div>
+					<span class="comment-userName">Tom</span>
+					<div class="comment-contentBox">
+						<p class="comment-content">这是评论内容</p>
+						<span class="comment-date">2017-01-14</span> &#x3000;&#x3000;&#x3000;
+						<span class="comment-ip">127.0.0.1</span>
+						
+					</div>
+				</section>
+			</section>
+		</div>
 	</body>
+	<script src="js/index.js"></script>
 </html>
