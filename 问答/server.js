@@ -26,57 +26,65 @@ app.get('/getAllQuestion', (req, res) => {
 				msg: '没有提问信息!'
 			})
 
-		}
-		else{
-			
+		} else {
+
 			//fs.readdir读取文件夹
-			fs.readdir('allQuestions',(err,data)=>{
-				
-				if(err){
+			fs.readdir('allQuestions', (err, data) => {
+
+				if(err) {
 					console.log('-----------')
-					res.status(200).json({result:0,msg:'系统出错!'})
-				}
-				else{
-					
+					res.status(200).json({
+						result: 0,
+						msg: '系统出错!'
+					})
+				} else {
+
 					//用来保存所有提问
 					var allMsg = []
-					
+
 					var count = 0
-					
+
 					//遍历allQuestions文件夹
-					for(var index in data){
-						
+					for(var i=data.length-1;i>=0 ;i--) {
+
 						//获取每一个文件
-						var aMsg = data[index]
+						var aMsg = data[i]
 						
+						console.log(aMsg)
 						//读取文件
-						fs.readFile(`allQuestions/${aMsg}`,(err,fileData)=>{
-								if(err){
-										console.log('==========='+ aMsg)
-									res.status(200).json({result:0,msg:'系统出错!'})
+						fs.readFile(`allQuestions/${aMsg}`, (err, fileData) => {
+							if(err) {
+								
+								res.status(200).json({
+									result: 0,
+									msg: '系统出错!'
+								})
+							} else {
+
+								//把文件内容转化为js对象
+								var aMsgObj = JSON.parse(fileData)
+
+								//把每一条提问都放入数组
+								allMsg.push(aMsgObj)
+
+								count++
+
+								if(count == data.length) {
+
+									res.status(200).json({
+										result: 1,
+										msg: '获取成功!',
+										data: allMsg
+									})
 								}
-								else{
-									
-									//把文件内容转化为js对象
-									var aMsgObj = JSON.parse(fileData)
-									
-									//把每一条提问都放入数组
-									allMsg.push(aMsgObj)
-									
-									count++
-									
-									if(count == data.length){
-										
-										res.status(200).json({result:1,msg:'获取成功!',data:allMsg})
-									}
-									
-								}
+
+							}
 						})
-						
+
 					}
-					
+
 				}
-				
+
 			})
 		}
 	})

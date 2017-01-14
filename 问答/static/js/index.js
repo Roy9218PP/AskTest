@@ -37,3 +37,17 @@ $('#goLogin').click(function(){
 	}
 	
 })
+
+$(function(){
+	
+	//获取所有提问
+	$.get('/getAllQuestion',function(response,statusText,xhr){
+		
+		//alert(response.data)
+		var html =  template('myTemplate',response)
+		
+		$('#contentBox').get(0).innerHTML = html
+		
+		//document.querySelector('#contentBox').innerHTML = html
+	})
+})

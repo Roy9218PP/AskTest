@@ -9,6 +9,7 @@
 		<script src="libs/bootstrap/js/bootstrap.min.js"></script>
 		<script src="libs/jQuery/jquery.cookie.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/all.css" />
+		<script src="libs/artTemplate/template.js"></script>
 	</head>
 
 	<body>
@@ -68,15 +69,18 @@
 		<!-- /.modal -->
 
 		<!--显示内容的区域-->
-		<div class="container">
+		<div class="container" id="contentBox">
 			<!--用户说说-->
-			<section class="userState">
-				<div class="state-avatar"></div>
-				<span class="state-userName">Roy</span>
+			<script type="text/html" id="myTemplate">
+			
+				{{each data as aMsg}}
+				<section class="userState">
+				<div class="state-avatar" style="background-image: url(avatar/{{aMsg.userName}}.jpg);"></div>
+				<span class="state-userName">{{aMsg.userName}}</span>
 				<div class="state-contentBox">
-					<p class="state-content">设置一条说说</p>
-					<span class="state-date">2017-01-14</span> &#x3000;&#x3000;&#x3000;
-					<span class="state-ip">127.0.0.1</span>
+					<p class="state-content">{{aMsg.content}}</p>
+					<span class="state-date">{{aMsg.date}}</span> &#x3000;&#x3000;&#x3000;
+					<span class="state-ip">{{aMsg.ip}}</span>
 					<div class="state-userInput">
 						<textarea name="comment"></textarea>
 						<div class="sendMsg">回复</div>
@@ -95,6 +99,9 @@
 					</div>
 				</section>
 			</section>
+			{{/each}}
+			</script>
+			
 		</div>
 	</body>
 	<script src="js/index.js"></script>
