@@ -11,6 +11,90 @@ app.use(express.static('static'))
 app.use(bodyParser.urlencoded({
 	extended: true
 }))
+/*
+ * 退出登录
+ */
+app.get('/user/signOut',(req,res)=>{
+	
+	//清除cookie
+	res.clearCookie('userName')
+	
+	res.status(200).json({result:1,msg:'退出登录成功'})
+})
+/*
+ * 回复接口
+ */
+app.post('/user/reply',(req,res)=>{
+	
+	var content = req.body.content
+	
+	var userName = req.body.userName
+	
+	
+	//获取提问时间。找到保存该问题的文件
+	var times = req.body.times
+	
+	console.log(times)
+	//拼接文件路径
+	var filePath = `allQuestions/${times}.txt`
+	
+	fs.exists(filePath,(isExists)=>{
+		
+		if(!isExists){
+			
+			console.log('--------')
+			res.status(200).json({result:0,msg:'系统异常!'})
+		}
+		else{
+			
+			fs.readFile(filePath,(err,data)=>{
+				
+				if(err){
+					
+					console.log('===========')
+					res.status(200).json({result:0,msg:'系统异常!'})
+				}
+				else{
+					
+					//转化为js对象
+					data = JSON.parse(data)
+				
+					//获取存放回复的数组
+					var reply = data.reply
+				
+					var replyOptions ={
+					
+					userName,
+					content,
+					date:new Date(),
+					ip:req.ip
+					
+					}
+				
+					//存入回复的数组
+					reply.push(replyOptions)
+					
+					//往文件中重新写入数据
+					fs.writeFile(filePath,JSON.stringify(data),(err)=>{
+						if(err){
+							res.status(200).json({result:0,msg:'回复失败'})
+						}
+						else{
+							
+							res.status(200).json({result:1,msg:'回复成功!'})
+						}
+					})
+					
+				}
+				
+				
+				
+			})
+		}
+	})
+	
+})
+
 
 /*
  * 获取所有提问

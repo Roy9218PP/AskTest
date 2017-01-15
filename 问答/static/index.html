@@ -28,7 +28,7 @@
 
 					<span id="goLogin" class="dropdown-toggle" data-toggle="dropdown">
    			 			<span class="glyphicon glyphicon-user"></span>
-						<span id="userName">登录</span>
+					<span id="userName">登录</span>
 					</span>
 
 					<ul class="dropdown-menu">
@@ -40,8 +40,8 @@
 						</li>
 
 						<li class="divider"></li>
-						<li class="text-right">
-							<a href="/login.html">退出登录</a>
+						<li class="text-right" id="signOut">
+							<a href="#">退出登录</a>
 						</li>
 					</ul>
 				</div>
@@ -72,37 +72,47 @@
 		<div class="container" id="contentBox">
 			<!--用户说说-->
 			<script type="text/html" id="myTemplate">
-			
+
 				{{each data as aMsg}}
-				<section class="userState">
-				<div class="state-avatar" style="background-image: url(avatar/{{aMsg.userName}}.jpg);"></div>
-				<span class="state-userName">{{aMsg.userName}}</span>
-				<div class="state-contentBox">
-					<p class="state-content">{{aMsg.content}}</p>
-					<span class="state-date">{{aMsg.date}}</span> &#x3000;&#x3000;&#x3000;
-					<span class="state-ip">{{aMsg.ip}}</span>
-					<div class="state-userInput">
-						<textarea name="comment"></textarea>
-						<div class="sendMsg">回复</div>
+				<!--把提问的时间作为section的一个属性保存起来-->
+				<section class="userState" data-date={{aMsg.date}}>
+					<div class="state-avatar" style="background-image: url(avatar/{{aMsg.userName}}.jpg);"></div>
+					<span class="state-userName">{{aMsg.userName}}</span>
+					<div class="state-contentBox">
+						<p class="state-content">{{aMsg.content}}</p>
+						<span class="state-date">{{aMsg.date}}</span> &#x3000;&#x3000;&#x3000;
+						<span class="state-ip">{{aMsg.ip}}</span>
+						<div class="state-userInput">
+							<textarea name="comment"></textarea>
+							<div class="sendMsg">回复</div>
+						</div>
 					</div>
-				</div>
-				
-				<!--好友评论-->
-				<section class="commentState">
-					<div class="comment-avatar"></div>
-					<span class="comment-userName">Tom</span>
-					<div class="comment-contentBox">
-						<p class="comment-content">这是评论内容</p>
-						<span class="comment-date">2017-01-14</span> &#x3000;&#x3000;&#x3000;
-						<span class="comment-ip">127.0.0.1</span>
-						
-					</div>
+					{{include 'commentTemplate' aMsg}}
 				</section>
-			</section>
-			{{/each}}
+				{{/each}}
 			</script>
 			
+			<!--子模板-->
+			<script type="text/html" id="commentTemplate">
+				
+				<!--好友评论-->
+				{{each reply as aReply}}
+				
+				<section class="commentState">
+					<div class="comment-avatar" style="background-image: url(avatar/{{aReply.userName}}.jpg);"></div>
+					<span class="comment-userName">{{aReply.userName}}</span>
+					<div class="comment-contentBox">
+						<p class="comment-content">{{aReply.content}}</p>
+						<span class="comment-date">{{aReply.date}}</span> 						&#x3000;&#x3000;&#x3000;
+						<span class="comment-ip">{{aReply.ip}}</span>
+
+					</div>
+				</section>
+				{{/each}}
+			</script>
 		</div>
+
 	</body>
 	<script src="js/index.js"></script>
+
 </html>

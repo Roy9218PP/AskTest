@@ -9,6 +9,11 @@ body{
 	padding: 15px 0;
 	color: #9D9D9D;
 }
+.userState{
+	border-bottom: 2px dotted gray;
+	margin: 10px 0;
+	background-color: lightgoldenrodyellow;
+}
 .state-avatar{
 	
 	display: inline-block;
@@ -34,6 +39,7 @@ body{
 
 .state-contentBox{
 	padding-left: 7rem;
+	
 }
 .state-content{
 	font-size: 1.5rem;
@@ -46,6 +52,8 @@ body{
 .state-userInput{
 	font-size: 0;
 	padding: 1rem 0;
+	border-bottom: 2px dotted gray;
+	margin: 20px 0;
 }
 .state-userInput>textarea{
 	display: inline-block;
@@ -66,6 +74,7 @@ body{
 }
 .commentState{
 	padding-left: 10rem;
+	
 }
 .comment-avatar{
 	
@@ -77,6 +86,7 @@ body{
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
+	background-color: orange;
 }
 .comment-userName{
 	
