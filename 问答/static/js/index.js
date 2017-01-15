@@ -44,6 +44,11 @@ $('#signOut').click(function(){
 		}
 	})
 })
+//个人信息按钮点击
+$('#goUserMsg').click(function(){
+	
+	location.href = '/user.html'
+})
 
 //回复按钮点击(注意此处需要使用事件委托，因为jQuery不能对新添加的元素绑定事件)
 $('#contentBox').delegate('.sendMsg','click',function(){

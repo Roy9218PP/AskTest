@@ -3,7 +3,30 @@ const express = require('express'),
 	bodyParser = require('body-parser'),
 
 	fs = require('fs'),
-
+	
+	//加载cookie-parser模块，该模块可以直接对cookie数据进行解析
+	cookieParser = require('cookie-parser'),
+	
+	multer = require('multer'),
+	
+	mystorage = multer.diskStorage({
+		//设置上传路径
+		destination:function(req,files,callback){
+			
+			callback(null,'static/avatar/')
+		},
+		//设置文件重命名
+		filename:function(req,files,callback){
+		
+			//从cookie中获取用户名
+			var userName = req.cookies.userName
+			
+			callback(null,`${userName}.jpg`)
+		}
+	}),
+	
+	upload =  multer({storage:mystorage}),
+	
 	app = express()
 
 app.use(express.static('static'))
@@ -11,6 +34,59 @@ app.use(express.static('static'))
 app.use(bodyParser.urlencoded({
 	extended: true
 }))
+
+app.use(cookieParser())
+
+/*
+ * 上传头像
+ */
+
+app.post('/user/uploadAvatar',upload.single('avatar'),(req,res)=>{
+	
+	fs.readdir('static/avatar',(err,data)=>{
+		
+		if(err){
+			res.status(200).json({result:0,msg:'系统异常!'})
+		}
+		else{
+			console.log(req.cookies)
+			
+			var userName = req.cookies.userName
+			
+			var fileName = `${userName}.jpg`
+			
+			var isOk = false
+			
+			for(var index in  data){
+				
+				var aAvatar = data[index]
+				
+				console.log(aAvatar)
+				
+				if(aAvatar == fileName){
+					
+					res.status(200).json({result:1,msg:'上传头像成功!'})
+					isOk = true
+				}
+				else{
+					
+					if(index == data.length-1){
+						
+						console.log('>>>>>>>>>>>')
+						if(isOk == false){
+							res.status(200).json({result:0,msg:'上传头像失败!'})
+						}
+						
+					}
+				}
+			}
+		}
+	})
+	
+	
+})
+
+
 /*
  * 退出登录
  */

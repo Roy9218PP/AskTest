@@ -110,3 +110,28 @@ body{
 	font-size: 1rem;
 	color: gray;
 }
+#avatarBox{
+	
+	width: 30rem;
+	height: 30rem;
+	margin: 2rem auto;
+	background-color: whitesmoke;
+	position: relative;
+	line-height: 30rem;
+	text-align: center;
+	font-size: 5rem;
+	border: 2px dotted gray;
+	color: gray;
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+#avatarBox input{
+	
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0;
+}
